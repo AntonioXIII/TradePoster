@@ -1,0 +1,19 @@
+{
+  "name": "tradeposter",
+  "version": "0.0.0-dev",
+  "description": "Posts trade information to Google Sheets and Slack.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonioXIII/TradePoster.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntonioXIII/TradePoster/issues"
+  },
+  "homepage": "https://github.com/AntonioXIII/TradePoster#readme"
+}
