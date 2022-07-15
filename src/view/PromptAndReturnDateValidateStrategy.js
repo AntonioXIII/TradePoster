@@ -31,7 +31,7 @@ let PromptAndReturnDateValidateStrategy = class extends IPromtAndReturnResponse
       }
     }
 
-    return response;
+    return new Date(Date.parse(response));
   }
 }
 

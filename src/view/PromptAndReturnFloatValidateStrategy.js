@@ -30,7 +30,7 @@ let PromptAndReturnFloatValidateStrategy = class extends IPromtAndReturnResponse
       }
     }
 
-    return response;
+    return parseFloat(response);
   }
 }
 

@@ -30,7 +30,7 @@ let PromptAndReturnNumberValidateStrategy = class extends IPromtAndReturnRespons
       }
     }
 
-    return response;
+    return parseInt(response);
   }
 }
 
