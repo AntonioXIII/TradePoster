@@ -38,6 +38,7 @@ let getDate = {};
 let getFloat = {};
 let getNum = {};
 let getString = {};
+let msg = '';
 let response = '';
 let tradeInfo = {};
 let slack = {};
@@ -129,11 +130,9 @@ if(tradeInfo.assetType == 'OPTION')
 
 }
 
-// Post message to channel
+// Format message based on asset type
 if(tradeInfo.assetType == 'OPTION')
 {
-  let msg = '';
-
   if(tradeInfo.soldDiffAmt >= 0)
   {
     msg = `PROFITABLE option trade completed. Details:\n
@@ -154,19 +153,41 @@ if(tradeInfo.assetType == 'OPTION')
     Sold for: $${tradeInfo.sold}\n
     Loss: $${Math.abs(tradeInfo.soldDiffAmt)} (${tradeInfo.soldDiffPct}%)`;
   }
-
-  (async () => {
-
-    //const result = await slack.conversations.list();
-    const result = await slack.chat.postMessage({
-      text: msg,
-      channel: appConfig.slackChannel
-    });
-  
-    // The result contains an identifier for the message, `ts`.
-    if(result.ok)
-    {
-      console.log(`The following message was posted to Slack:\n ${msg}`);
-    }
-  })();
 }
+else 
+{
+  if(tradeInfo.soldDiffAmt >= 0)
+  {
+    msg = `PROFITABLE stock trade completed. Details:\n
+    Symbol: ${tradeInfo.symbol}\n
+    Date: ${tradeInfo.date.getMonth() + 1}/${tradeInfo.date.getDate()}/${tradeInfo.date.getFullYear()}\n
+    Cost: $${tradeInfo.initInvestment}\n
+    Sold for: $${tradeInfo.sold}\n
+    Profit: \$${tradeInfo.soldDiffAmt} (${tradeInfo.soldDiffPct}%)`;
+  }
+  else 
+  {
+    msg = `UNPROFITABLE stock trade completed. Details:\n
+    Symbol: ${tradeInfo.symbol}\n
+    Date: ${tradeInfo.date.getMonth() + 1}/${tradeInfo.date.getDate()}/${tradeInfo.date.getFullYear()}\n
+    Cost: $${tradeInfo.initInvestment}\n
+    Sold for: $${tradeInfo.sold}\n
+    Loss: $${Math.abs(tradeInfo.soldDiffAmt)} (${tradeInfo.soldDiffPct}%)`;
+  }
+}
+
+// Post message to channel
+(async () => {
+
+  //const result = await slack.conversations.list();
+  const result = await slack.chat.postMessage({
+    text: msg,
+    channel: appConfig.slackChannel
+  });
+
+  // The result contains an identifier for the message, `ts`.
+  if(result.ok)
+  {
+    console.log(`The following message was posted to Slack:\n ${msg}`);
+  }
+})();
