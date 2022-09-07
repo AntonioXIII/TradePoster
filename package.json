@@ -1,6 +1,6 @@
 {
   "name": "tradeposter",
-  "version": "0.1.0-dev",
+  "version": "0.1.1-dev",
   "description": "Posts trade information to Google Sheets and Slack.",
   "main": "index.js",
   "scripts": {
