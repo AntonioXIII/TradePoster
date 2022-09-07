@@ -144,7 +144,7 @@ let mainFunc = async function(){
   }
 
   let prevQuarterlyProfit = parseFloat(sheetRows[sheetRows.length - 1]['Quarterly Profit']
-    .substring(1).replace(',', ''));
+    .replace('$','').replace(',', ''));
   newSheetRow['Date'] = 
     `${tradeInfo.date.getMonth() + 1}/${tradeInfo.date.getDate()}/${tradeInfo.date.getFullYear()}`;
   newSheetRow['Initial'] = tradeInfo.initInvestment;
